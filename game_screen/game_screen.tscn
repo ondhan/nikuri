@@ -2,5 +2,81 @@
 
 [ext_resource type="Script" path="res://game_screen/game_screen.gd" id="1_10y4f"]
 
-[node name="Game screen" type="Node2D"]
+[node name="GameScreen" type="Node2D"]
 script = ExtResource("1_10y4f")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1500, 1000)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 500.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="PauseButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -550.0
+offset_top = -300.0
+offset_right = -480.0
+offset_bottom = -269.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Pause"
+
+[node name="PauseScreen" type="Node2D" parent="."]
+visible = false
+
+[node name="ResumeButton" type="Button" parent="PauseScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_right = 50.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Resume"
+
+[node name="MainMenuButton" type="Button" parent="PauseScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 50.0
+offset_right = 50.0
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Main menu"
+
+[node name="ExitButton" type="Button" parent="PauseScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 100.0
+offset_right = 50.0
+offset_bottom = 131.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="PauseScreen/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PauseScreen/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="PauseScreen/ExitButton" to="." method="_on_exit_button_pressed"]

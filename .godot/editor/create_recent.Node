@@ -1,4 +1,6 @@
-CenterContainer
-Node2D
+ColorRect
+CanvasGroup
 Button
+Node2D
+CenterContainer
 Label
