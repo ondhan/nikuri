@@ -12,10 +12,12 @@ func _process(delta: float) -> void:
 
 
 func _on_play_button_pressed() -> void:
+	print("play button pressed")
 	get_tree().change_scene_to_file("res://game_screen/game_screen.tscn")
 
 
 func _on_options_button_pressed() -> void:
+	print("options button pressed")
 	get_tree().change_scene_to_file("res://options_menu/options_menu.tscn")
 
 

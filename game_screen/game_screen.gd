@@ -13,28 +13,13 @@ func _process(delta: float) -> void:
 
 func _input(event):
 	var PauseScreen = get_node("PauseScreen")
-	if event.is_action_pressed("ui_pause"):
-		if PauseScreen.is_visible():
-			print("paused")
-			PauseScreen.set_visible(false)
-		elif not PauseScreen.is_visible():
-			print("unpaused")
-			PauseScreen.set_visible(true)
+	if event.is_action_pressed("ui_pause") and not PauseScreen.was_paused:
+		print("calling pause game on Esc key")
+		PauseScreen._pause_game()
+	else:
+		PauseScreen.was_paused = false;
 
 
 func _on_pause_button_pressed() -> void:
-	var PauseScreen = get_node("PauseScreen")
-	PauseScreen.set_visible(true)
-
-
-func _on_resume_button_pressed() -> void:
-	var PauseScreen = get_node("PauseScreen")
-	PauseScreen.set_visible(false)
-
-
-func _on_main_menu_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://main_menu/main_menu.tscn")
-
-
-func _on_exit_button_pressed() -> void:
-	get_tree().quit()
+	print("calling pause game on pause button")
+	get_node("PauseScreen")._pause_game()
