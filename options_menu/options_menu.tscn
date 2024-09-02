@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://options_menu/options_menu.gd" id="1_uhb8j"]
 
 [node name="OptionsMenu" type="Node2D"]
+position = Vector2(550, 300)
 script = ExtResource("1_uhb8j")
 
 [node name="ColorRect" type="ColorRect" parent="."]
