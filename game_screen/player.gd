@@ -27,32 +27,57 @@ func _process(delta: float) -> void:
 		velocity = velocity.normalized() * speed
 		$AnimatedSprite2D.play()
 	else:
-		if last_move_anim == "right":
-			$AnimatedSprite2D.animation = "idle_left"
-		elif last_move_anim == "left":
-			$AnimatedSprite2D.animation = "idle_left"
-		elif last_move_anim == "down":
-			$AnimatedSprite2D.animation = "idle_down"
-		elif last_move_anim == "up":
-			$AnimatedSprite2D.animation = "idle_up"
+		if last_move_anim == "e":
+			$AnimatedSprite2D.animation = "idle_w"
+		elif last_move_anim == "ne":
+			$AnimatedSprite2D.animation = "idle_nw"
+		elif last_move_anim == "se":
+			$AnimatedSprite2D.animation = "idle_sw"
+		elif last_move_anim == "w":
+			$AnimatedSprite2D.animation = "idle_w"
+		elif last_move_anim == "nw":
+			$AnimatedSprite2D.animation = "idle_nw"
+		elif last_move_anim == "sw":
+			$AnimatedSprite2D.animation = "idle_sw"
+		elif last_move_anim == "s":
+			$AnimatedSprite2D.animation = "idle_s"
+		elif last_move_anim == "n":
+			$AnimatedSprite2D.animation = "idle_n"
 	
 	position += velocity * delta
 	#position.x = clamp(position.x, 0, screen_size.x)
 	#position.y = clamp(position.y, 0, screen_size.y)
 	
-	if velocity.x != 0:
+	if velocity.x != 0 and velocity.y == 0:
 		if Input.is_action_pressed("move_right"):
 			$AnimatedSprite2D.flip_h = true
-			$AnimatedSprite2D.animation = "move_left"
-			last_move_anim = "right"
+			$AnimatedSprite2D.animation = "move_w"
+			last_move_anim = "e"
 		if Input.is_action_pressed("move_left"):
 			$AnimatedSprite2D.flip_h = false
-			$AnimatedSprite2D.animation = "move_left"
-			last_move_anim = "left"
-	elif velocity.y != 0:
+			$AnimatedSprite2D.animation = "move_w"
+			last_move_anim = "w"
+	elif velocity.x == 0 and velocity.y != 0:
 		if Input.is_action_pressed("move_down"):
-			$AnimatedSprite2D.animation = "move_down"
-			last_move_anim = "down"
+			$AnimatedSprite2D.animation = "move_s"
+			last_move_anim = "s"
 		if Input.is_action_pressed("move_up"):
-			$AnimatedSprite2D.animation = "move_up"
-			last_move_anim = "up"
+			$AnimatedSprite2D.animation = "move_n"
+			last_move_anim = "n"
+	elif velocity.x != 0 and velocity.y != 0:
+		if Input.is_action_pressed("move_down") and Input.is_action_pressed("move_left"):
+			$AnimatedSprite2D.flip_h = false
+			$AnimatedSprite2D.animation = "move_sw"
+			last_move_anim = "sw"
+		if Input.is_action_pressed("move_down") and Input.is_action_pressed("move_right"):
+			$AnimatedSprite2D.flip_h = true
+			$AnimatedSprite2D.animation = "move_sw"
+			last_move_anim = "se"
+		if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_left"):
+			$AnimatedSprite2D.flip_h = false
+			$AnimatedSprite2D.animation = "move_nw"
+			last_move_anim = "nw"
+		if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_right"):
+			$AnimatedSprite2D.flip_h = true
+			$AnimatedSprite2D.animation = "move_nw"
+			last_move_anim = "ne"
