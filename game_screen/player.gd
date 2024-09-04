@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 
 
 @export var speed = 400 # how fast the player will move (pixels/sec)
@@ -9,7 +9,6 @@ var last_move_anim # last movement animation used
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -81,3 +80,9 @@ func _process(delta: float) -> void:
 			$AnimatedSprite2D.flip_h = true
 			$AnimatedSprite2D.animation = "move_nw"
 			last_move_anim = "ne"
+
+func _physics_process(delta):
+	var collision_info = move_and_collide(velocity * delta)
+	if collision_info:
+		print("collision with an object")
+		velocity = velocity.bounce(collision_info.get_normal())

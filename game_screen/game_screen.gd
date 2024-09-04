@@ -12,7 +12,7 @@ func _process(delta: float) -> void:
 
 
 func _input(event):
-	var PauseScreen = get_node("PauseScreen")
+	var PauseScreen = get_node("Camera/CanvasLayer/PauseScreen")
 	if event.is_action_pressed("ui_pause") and not PauseScreen.was_paused:
 		print("calling pause game on Esc key")
 		PauseScreen._pause_game()

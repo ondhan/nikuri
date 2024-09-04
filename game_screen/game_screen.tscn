@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://djbvvtdb2q3hi"]
+[gd_scene load_steps=47 format=3 uid="uid://djbvvtdb2q3hi"]
 
 [ext_resource type="Script" path="res://game_screen/game_screen.gd" id="1_10y4f"]
 [ext_resource type="Script" path="res://game_screen/player.gd" id="2_2qj2a"]
@@ -43,6 +43,8 @@
 [ext_resource type="Texture2D" uid="uid://6hh2k2kd8suh" path="res://animations/nikuri/move_w_2.png" id="40_fjmdq"]
 [ext_resource type="Texture2D" uid="uid://damobkx138qr" path="res://animations/nikuri/move_w_3.png" id="41_u6fhx"]
 [ext_resource type="Texture2D" uid="uid://chn84fibce87s" path="res://animations/nikuri/move_w_4.png" id="42_r7b7x"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_y70dm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ix62d"]
 animations = [{
@@ -230,29 +232,36 @@ custom_minimum_size = Vector2(1500, 1000)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -500.0
+offset_left = -750.0
 offset_top = -500.0
-offset_right = 500.0
+offset_right = 750.0
 offset_bottom = 500.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="PauseButton" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -550.0
-offset_top = -300.0
-offset_right = -480.0
-offset_bottom = -269.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Pause"
+[node name="WorldBoundary" type="StaticBody2D" parent="."]
 
-[node name="Player" type="Area2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(-727, -21)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_y70dm")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(-24, 467)
+shape = SubResource("WorldBoundaryShape2D_y70dm")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(22, -476)
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_y70dm")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(725, -17)
+rotation = 4.71239
+shape = SubResource("WorldBoundaryShape2D_y70dm")
+
+[node name="Player" type="CharacterBody2D" parent="."]
 script = ExtResource("2_2qj2a")
 metadata/_edit_group_ = true
 
@@ -264,12 +273,39 @@ autoplay = "idle_s"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("CapsuleShape2D_12a6m")
 
-[node name="PauseScreen" type="Node2D" parent="."]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera")
+
+[node name="Camera" type="Camera2D" parent="."]
+limit_left = -195
+limit_top = -190
+limit_right = 1290
+limit_bottom = 795
+editor_draw_limits = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
+
+[node name="PauseButton" type="Button" parent="Camera/CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -506.0
+offset_bottom = -293.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Pause"
+
+[node name="PauseScreen" type="Node2D" parent="Camera/CanvasLayer"]
 process_mode = 2
 visible = false
+position = Vector2(550, 300)
 script = ExtResource("2_boxpe")
 
-[node name="ColorRect" type="ColorRect" parent="PauseScreen"]
+[node name="ColorRect" type="ColorRect" parent="Camera/CanvasLayer/PauseScreen"]
 custom_minimum_size = Vector2(1500, 1000)
 anchors_preset = 15
 anchor_right = 1.0
@@ -282,7 +318,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="ResumeButton" type="Button" parent="PauseScreen"]
+[node name="ResumeButton" type="Button" parent="Camera/CanvasLayer/PauseScreen"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -295,7 +331,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Resume"
 
-[node name="MainMenuButton" type="Button" parent="PauseScreen"]
+[node name="MainMenuButton" type="Button" parent="Camera/CanvasLayer/PauseScreen"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -309,7 +345,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Main menu"
 
-[node name="ExitButton" type="Button" parent="PauseScreen"]
+[node name="ExitButton" type="Button" parent="Camera/CanvasLayer/PauseScreen"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -323,7 +359,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Exit"
 
-[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
-[connection signal="pressed" from="PauseScreen/ResumeButton" to="PauseScreen" method="_on_resume_button_pressed"]
-[connection signal="pressed" from="PauseScreen/MainMenuButton" to="PauseScreen" method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="PauseScreen/ExitButton" to="PauseScreen" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Camera/CanvasLayer/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="Camera/CanvasLayer/PauseScreen/ResumeButton" to="Camera/CanvasLayer/PauseScreen" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Camera/CanvasLayer/PauseScreen/MainMenuButton" to="Camera/CanvasLayer/PauseScreen" method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="Camera/CanvasLayer/PauseScreen/ExitButton" to="Camera/CanvasLayer/PauseScreen" method="_on_exit_button_pressed"]
