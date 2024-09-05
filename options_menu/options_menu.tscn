@@ -21,8 +21,31 @@ color = Color(0, 0, 0, 1)
 
 [node name="BackButton" type="Button" parent="."]
 offset_left = -50.0
+offset_top = 250.0
 offset_right = 50.0
-offset_bottom = 31.0
+offset_bottom = 281.0
 text = "Back"
 
+[node name="WindowModeButton" type="MenuButton" parent="."]
+offset_left = -50.0
+offset_top = -250.0
+offset_right = 50.0
+offset_bottom = -219.0
+text = "Window mode"
+item_count = 2
+popup/item_0/text = "Fullscreen"
+popup/item_1/text = "Windowed"
+popup/item_1/id = 1
+
+[node name="MenuButton" type="MenuButton" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "TEST"
+item_count = 2
+popup/item_0/text = "A"
+popup/item_1/text = "B"
+popup/item_1/id = 1
+
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="WindowModeButton" to="." method="_on_window_menu_button_pressed"]
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]

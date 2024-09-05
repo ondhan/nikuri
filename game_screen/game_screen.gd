@@ -22,4 +22,4 @@ func _input(event):
 
 func _on_pause_button_pressed() -> void:
 	print("calling pause game on pause button")
-	get_node("PauseScreen")._pause_game()
+	get_node("Camera/CanvasLayer/PauseScreen")._pause_game()
