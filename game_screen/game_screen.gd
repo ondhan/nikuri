@@ -1,5 +1,6 @@
 extends Node2D
 
+var time = "day"
 
 # called when the node enters the scene tree for the first time
 func _ready() -> void:
@@ -23,3 +24,13 @@ func _input(event):
 func _on_pause_button_pressed() -> void:
 	print("calling pause game on pause button")
 	get_node("Camera/CanvasLayer/PauseScreen")._pause_game()
+
+
+# changes day to night once timer stops
+func _on_timer_timeout() -> void:
+	if time == "day":
+		print("switching to night")
+		time = "night"
+	else:
+		print("switching to day")
+		time = "day"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://djbvvtdb2q3hi"]
+[gd_scene load_steps=48 format=3 uid="uid://djbvvtdb2q3hi"]
 
 [ext_resource type="Script" path="res://game_screen/game_screen.gd" id="1_10y4f"]
 [ext_resource type="Script" path="res://game_screen/player.gd" id="2_2qj2a"]
@@ -223,12 +223,34 @@ animations = [{
 radius = 24.0
 height = 50.0
 
+[sub_resource type="GDScript" id="GDScript_qqhcx"]
+script/source = "extends Camera2D
+
+
+var node_to_follow = null
+var smooth_amount = 0.1
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+func set_follow_node(new_node):
+	node_to_follow = new_node
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if node_to_follow:
+		position = lerp(position, node_to_follow.position, smooth_amount)
+"
+
 [node name="GameScreen" type="Node2D"]
-position = Vector2(550, 300)
+position = Vector2(960, 540)
 script = ExtResource("1_10y4f")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(1500, 1000)
+custom_minimum_size = Vector2(5760, 3240)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -242,22 +264,22 @@ color = Color(0, 0, 0, 1)
 
 [node name="WorldBoundary" type="StaticBody2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundary"]
-position = Vector2(-727, -21)
+[node name="left" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(-2877, -1525)
 rotation = 1.5708
 shape = SubResource("WorldBoundaryShape2D_y70dm")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="WorldBoundary"]
-position = Vector2(-24, 467)
-shape = SubResource("WorldBoundaryShape2D_y70dm")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="WorldBoundary"]
-position = Vector2(22, -476)
+[node name="top" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(-2775, -1616)
 rotation = 3.14159
 shape = SubResource("WorldBoundaryShape2D_y70dm")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="WorldBoundary"]
-position = Vector2(725, -17)
+[node name="bottom" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(2785, 1617)
+shape = SubResource("WorldBoundaryShape2D_y70dm")
+
+[node name="right" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(2877, 1529)
 rotation = 4.71239
 shape = SubResource("WorldBoundaryShape2D_y70dm")
 
@@ -277,13 +299,19 @@ shape = SubResource("CapsuleShape2D_12a6m")
 remote_path = NodePath("../../Camera")
 
 [node name="Camera" type="Camera2D" parent="."]
-limit_left = -195
-limit_top = -190
-limit_right = 1290
-limit_bottom = 795
+limit_left = -1920
+limit_top = -1080
+limit_right = 3840
+limit_bottom = 2160
 editor_draw_limits = true
+script = SubResource("GDScript_qqhcx")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
+
+[node name="Timer" type="Timer" parent="Camera/CanvasLayer"]
+process_callback = 0
+wait_time = 5.0
+autostart = true
 
 [node name="PauseButton" type="Button" parent="Camera/CanvasLayer"]
 anchors_preset = 8
@@ -291,10 +319,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -576.0
-offset_top = -324.0
-offset_right = -506.0
-offset_bottom = -293.0
+offset_left = -935.0
+offset_top = -515.0
+offset_right = -865.0
+offset_bottom = -484.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Pause"
@@ -302,11 +330,11 @@ text = "Pause"
 [node name="PauseScreen" type="Node2D" parent="Camera/CanvasLayer"]
 process_mode = 2
 visible = false
-position = Vector2(550, 300)
+position = Vector2(960, 540)
 script = ExtResource("2_boxpe")
 
 [node name="ColorRect" type="ColorRect" parent="Camera/CanvasLayer/PauseScreen"]
-custom_minimum_size = Vector2(1500, 1000)
+custom_minimum_size = Vector2(2500, 2000)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -325,8 +353,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -50.0
+offset_top = -50.0
 offset_right = 50.0
-offset_bottom = 31.0
+offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Resume"
@@ -338,9 +367,8 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -50.0
-offset_top = 50.0
 offset_right = 50.0
-offset_bottom = 81.0
+offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Main menu"
@@ -352,13 +380,26 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -50.0
-offset_top = 100.0
+offset_top = 50.0
 offset_right = 50.0
-offset_bottom = 131.0
+offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Exit"
 
+[node name="DayIcon" type="TextureRect" parent="Camera/CanvasLayer"]
+offset_left = 100.0
+offset_top = 25.0
+offset_right = 140.0
+offset_bottom = 65.0
+
+[node name="NightIcon" type="TextureRect" parent="Camera/CanvasLayer"]
+offset_left = 100.0
+offset_top = 25.0
+offset_right = 140.0
+offset_bottom = 65.0
+
+[connection signal="timeout" from="Camera/CanvasLayer/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Camera/CanvasLayer/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="Camera/CanvasLayer/PauseScreen/ResumeButton" to="Camera/CanvasLayer/PauseScreen" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Camera/CanvasLayer/PauseScreen/MainMenuButton" to="Camera/CanvasLayer/PauseScreen" method="_on_main_menu_button_pressed"]

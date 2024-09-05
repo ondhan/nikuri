@@ -1,3 +1,5 @@
+TextureRect
+Timer
 MenuButton
 CheckButton
 OptionButton
@@ -10,5 +12,3 @@ Camera2D
 Area2D
 AnimatedSprite2D
 ColorRect
-CanvasGroup
-Button

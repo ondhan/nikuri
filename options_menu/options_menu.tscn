@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://options_menu/options_menu.gd" id="1_uhb8j"]
 
 [node name="OptionsMenu" type="Node2D"]
-position = Vector2(550, 300)
+position = Vector2(960, 540)
 script = ExtResource("1_uhb8j")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(1500, 1000)
+custom_minimum_size = Vector2(2500, 2000)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,7 +31,7 @@ offset_left = -50.0
 offset_top = -250.0
 offset_right = 50.0
 offset_bottom = -219.0
-text = "Window mode"
+text = "THIS TEXT SHOULD NOT BE VISIBLE"
 item_count = 2
 popup/item_0/text = "Fullscreen"
 popup/item_1/text = "Windowed"
