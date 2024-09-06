@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://djbvvtdb2q3hi"]
+[gd_scene load_steps=51 format=3 uid="uid://djbvvtdb2q3hi"]
 
 [ext_resource type="Script" path="res://game_screen/game_screen.gd" id="1_10y4f"]
 [ext_resource type="Script" path="res://game_screen/player.gd" id="2_2qj2a"]
@@ -43,6 +43,9 @@
 [ext_resource type="Texture2D" uid="uid://6hh2k2kd8suh" path="res://animations/nikuri/move_w_2.png" id="40_fjmdq"]
 [ext_resource type="Texture2D" uid="uid://damobkx138qr" path="res://animations/nikuri/move_w_3.png" id="41_u6fhx"]
 [ext_resource type="Texture2D" uid="uid://chn84fibce87s" path="res://animations/nikuri/move_w_4.png" id="42_r7b7x"]
+[ext_resource type="Texture2D" uid="uid://dngmqfycl068u" path="res://art_still/icons/icon_pause_menu.png" id="43_ucdbq"]
+[ext_resource type="Texture2D" uid="uid://w772he6u03ef" path="res://art_still/icons/icon_day_cycle_day.png" id="44_j2xhg"]
+[ext_resource type="Texture2D" uid="uid://b6ncgkxd4um84" path="res://art_still/icons/icon_day_cycle_night.png" id="45_vsajx"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_y70dm"]
 
@@ -313,19 +316,29 @@ process_callback = 0
 wait_time = 5.0
 autostart = true
 
+[node name="DayIcon" type="Sprite2D" parent="Camera/CanvasLayer"]
+visible = false
+position = Vector2(150, 50)
+texture = ExtResource("44_j2xhg")
+
+[node name="NightIcon" type="Sprite2D" parent="Camera/CanvasLayer"]
+visible = false
+position = Vector2(150, 50)
+texture = ExtResource("45_vsajx")
+
 [node name="PauseButton" type="Button" parent="Camera/CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -935.0
-offset_top = -515.0
-offset_right = -865.0
-offset_bottom = -484.0
+offset_left = -936.0
+offset_top = -523.0
+offset_right = -861.0
+offset_bottom = -448.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Pause"
+icon = ExtResource("43_ucdbq")
 
 [node name="PauseScreen" type="Node2D" parent="Camera/CanvasLayer"]
 process_mode = 2
@@ -386,18 +399,6 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Exit"
-
-[node name="DayIcon" type="TextureRect" parent="Camera/CanvasLayer"]
-offset_left = 100.0
-offset_top = 25.0
-offset_right = 140.0
-offset_bottom = 65.0
-
-[node name="NightIcon" type="TextureRect" parent="Camera/CanvasLayer"]
-offset_left = 100.0
-offset_top = 25.0
-offset_right = 140.0
-offset_bottom = 65.0
 
 [connection signal="timeout" from="Camera/CanvasLayer/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Camera/CanvasLayer/PauseButton" to="." method="_on_pause_button_pressed"]

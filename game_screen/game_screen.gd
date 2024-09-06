@@ -4,7 +4,7 @@ var time = "day"
 
 # called when the node enters the scene tree for the first time
 func _ready() -> void:
-	pass
+	_set_time()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,11 +26,23 @@ func _on_pause_button_pressed() -> void:
 	get_node("Camera/CanvasLayer/PauseScreen")._pause_game()
 
 
+# sets the correct day/night icon when loading the scene
+func _set_time() -> void:
+	if time == "day":
+		$Camera/CanvasLayer/DayIcon.show()
+	elif time == "night":
+		$Camera/CanvasLayer/NightIcon.show()
+
+
 # changes day to night once timer stops
 func _on_timer_timeout() -> void:
 	if time == "day":
 		print("switching to night")
 		time = "night"
+		$Camera/CanvasLayer/DayIcon.hide()
+		$Camera/CanvasLayer/NightIcon.show()
 	else:
 		print("switching to day")
 		time = "day"
+		$Camera/CanvasLayer/DayIcon.show()
+		$Camera/CanvasLayer/NightIcon.hide()

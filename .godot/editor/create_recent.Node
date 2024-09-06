@@ -1,3 +1,5 @@
+Sprite2D
+Node2D
 TextureRect
 Timer
 MenuButton
@@ -10,5 +12,3 @@ CharacterBody2D
 StaticBody2D
 Camera2D
 Area2D
-AnimatedSprite2D
-ColorRect
