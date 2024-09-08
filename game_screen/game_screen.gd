@@ -2,10 +2,6 @@ extends Node2D
 
 var time = "day"
 
-# called when the node enters the scene tree for the first time
-func _ready() -> void:
-	_set_time()
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

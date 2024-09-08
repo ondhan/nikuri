@@ -79,6 +79,8 @@ func _process(delta: float) -> void:
 			$AnimatedSprite2D.animation = "move_nw"
 			last_move_anim = "ne"
 
+
+# manages collisions
 func _physics_process(delta):
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
