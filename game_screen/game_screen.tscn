@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://djbvvtdb2q3hi"]
+[gd_scene load_steps=105 format=3 uid="uid://djbvvtdb2q3hi"]
 
 [ext_resource type="Script" path="res://game_screen/game_screen.gd" id="1_10y4f"]
 [ext_resource type="Script" path="res://game_screen/player.gd" id="2_2qj2a"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://game_screen/main_hive.gd" id="2_vcyq3"]
 [ext_resource type="Texture2D" uid="uid://rw7ryhdw8qm2" path="res://assets/nikuri/idle_n_1.png" id="3_3xhl5"]
 [ext_resource type="Texture2D" uid="uid://dtvup02g43klp" path="res://assets/buildings/main_hive/main_hive_2_1.png" id="3_evuny"]
+[ext_resource type="Texture2D" uid="uid://chmaqqujlm4si" path="res://assets/icons/icon_interact_cycle.png" id="3_svlki"]
 [ext_resource type="Texture2D" uid="uid://e483wpd61u3f" path="res://assets/nikuri/idle_n_2.png" id="4_rd3nm"]
 [ext_resource type="Texture2D" uid="uid://dbpt7vpoc7anw" path="res://assets/buildings/main_hive/main_hive_2_2.png" id="4_ysggw"]
 [ext_resource type="Texture2D" uid="uid://bxhuur60ds3j4" path="res://assets/nikuri/idle_n_3.png" id="5_026x7"]
@@ -27,18 +28,26 @@
 [ext_resource type="Texture2D" uid="uid://bp73xhmugoso7" path="res://assets/nikuri/idle_s_3.png" id="13_j6xjy"]
 [ext_resource type="Texture2D" uid="uid://bpjwfbb4d6e5j" path="res://assets/nikuri/idle_s_4.png" id="14_1erwv"]
 [ext_resource type="Texture2D" uid="uid://evg8vxxr428f" path="res://assets/nikuri/idle_e_1.png" id="14_hyp0o"]
+[ext_resource type="Texture2D" uid="uid://bcamptfd4omih" path="res://assets/bars/bar_under.png" id="14_ykafg"]
+[ext_resource type="Texture2D" uid="uid://cuoaxuruee14q" path="res://assets/bars/bar_border.png" id="15_0rmaj"]
 [ext_resource type="Texture2D" uid="uid://d68f7koutrdd" path="res://assets/nikuri/idle_e_2.png" id="15_3uwvc"]
 [ext_resource type="Texture2D" uid="uid://bexsh6i3ocw6p" path="res://assets/nikuri/idle_sw_1.png" id="15_bxj8h"]
+[ext_resource type="Texture2D" uid="uid://bddgox25djio2" path="res://assets/bars/bar_fill.png" id="16_0ii00"]
 [ext_resource type="Texture2D" uid="uid://ugyakockid2t" path="res://assets/nikuri/idle_e_3.png" id="16_3afv8"]
 [ext_resource type="Texture2D" uid="uid://dwmfbu0aar0m2" path="res://assets/nikuri/idle_sw_2.png" id="16_nx1gq"]
 [ext_resource type="Texture2D" uid="uid://s883sya612fg" path="res://assets/nikuri/idle_e_4.png" id="17_2bxhn"]
 [ext_resource type="Texture2D" uid="uid://cdv6m26aqsd4f" path="res://assets/nikuri/idle_sw_3.png" id="17_giwdr"]
+[ext_resource type="Texture2D" uid="uid://d7eo6p5rih0a" path="res://assets/icons/icon_sun.png" id="17_l8qtu"]
 [ext_resource type="Texture2D" uid="uid://dbgurl30p8ko3" path="res://assets/nikuri/idle_sw_4.png" id="18_vwvis"]
+[ext_resource type="Texture2D" uid="uid://dc28yu4o8e7ue" path="res://assets/icons/icon_water.png" id="18_xtp1l"]
 [ext_resource type="Texture2D" uid="uid://bddtlyetfpt8i" path="res://assets/nikuri/idle_w_1.png" id="19_aifxy"]
+[ext_resource type="Texture2D" uid="uid://cll5teoj1mjf8" path="res://assets/icons/icon_biomass.png" id="19_q544m"]
 [ext_resource type="Texture2D" uid="uid://02xawp3qpc82" path="res://assets/nikuri/idle_w_2.png" id="20_grweb"]
+[ext_resource type="Texture2D" uid="uid://bhrp4caa37uia" path="res://assets/icons/icon_plus.png" id="21_61u3r"]
 [ext_resource type="Texture2D" uid="uid://ddup8i47jdhjk" path="res://assets/nikuri/idle_w_3.png" id="21_lsslf"]
 [ext_resource type="Texture2D" uid="uid://m7n8cpkrkvs5" path="res://assets/nikuri/idle_w_4.png" id="22_l8mgp"]
 [ext_resource type="Texture2D" uid="uid://brvbj4ti6yex2" path="res://assets/nikuri/idle_ne_1.png" id="22_q5rem"]
+[ext_resource type="Texture2D" uid="uid://ddj235vt2871" path="res://assets/icons/icon_minus.png" id="22_umres"]
 [ext_resource type="Texture2D" uid="uid://dmywwmm7ga4l5" path="res://assets/nikuri/move_n_1.png" id="23_1ojna"]
 [ext_resource type="Texture2D" uid="uid://8h8w37gqpem2" path="res://assets/nikuri/idle_ne_2.png" id="23_qyqd2"]
 [ext_resource type="Texture2D" uid="uid://ccsajqyartfg0" path="res://assets/nikuri/move_n_2.png" id="24_cxk0r"]
@@ -81,12 +90,13 @@
 [ext_resource type="Texture2D" uid="uid://cbblsqbx5k2cx" path="res://assets/nikuri/move_se_2.png" id="67_lrd3u"]
 [ext_resource type="Texture2D" uid="uid://dv2efyt84elxo" path="res://assets/nikuri/move_se_3.png" id="68_eq6gm"]
 [ext_resource type="Texture2D" uid="uid://bkgafmtajgu3a" path="res://assets/nikuri/move_se_4.png" id="69_pp7rv"]
+[ext_resource type="Script" path="res://game_screen/resource_control.gd" id="82_2utfl"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_y70dm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n718v"]
-radius = 49.0
-height = 198.0
+radius = 18.0
+height = 66.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yppow"]
 animations = [{
@@ -509,13 +519,19 @@ shape = SubResource("WorldBoundaryShape2D_y70dm")
 position = Vector2(0, -200)
 script = ExtResource("2_vcyq3")
 
-[node name="InteractArea" type="Area2D" parent="MainHive"]
-position = Vector2(-62, -1)
+[node name="HiveInteractArea" type="Area2D" parent="MainHive"]
+position = Vector2(-65, 0)
+collision_layer = 2
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MainHive/InteractArea"]
-position = Vector2(65, 204)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainHive/HiveInteractArea"]
+position = Vector2(65, 261)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_n718v")
+
+[node name="Sprite2D" type="Sprite2D" parent="MainHive/HiveInteractArea"]
+position = Vector2(64, 258)
+texture = ExtResource("3_svlki")
 
 [node name="Phase1" type="StaticBody2D" parent="MainHive"]
 
@@ -564,8 +580,126 @@ autoplay = "phase_4"
 position = Vector2(4, 120)
 shape = SubResource("CapsuleShape2D_rn5fc")
 
+[node name="ResourceControl" type="Control" parent="MainHive"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -107.0
+offset_top = -22.0
+offset_right = -67.0
+offset_bottom = 18.0
+script = ExtResource("82_2utfl")
+
+[node name="SunProgressBar" type="TextureProgressBar" parent="MainHive/ResourceControl"]
+offset_left = -250.0
+offset_top = 350.0
+offset_bottom = 400.0
+texture_under = ExtResource("14_ykafg")
+texture_over = ExtResource("15_0rmaj")
+texture_progress = ExtResource("16_0ii00")
+tint_under = Color(0, 0, 0, 1)
+
+[node name="SunIcon" type="Sprite2D" parent="MainHive/ResourceControl/SunProgressBar"]
+position = Vector2(-31, 23)
+texture = ExtResource("17_l8qtu")
+
+[node name="WaterProgressBar" type="TextureProgressBar" parent="MainHive/ResourceControl"]
+offset_left = -250.0
+offset_top = 425.0
+offset_bottom = 475.0
+texture_under = ExtResource("14_ykafg")
+texture_over = ExtResource("15_0rmaj")
+texture_progress = ExtResource("16_0ii00")
+tint_under = Color(0, 0, 0, 1)
+
+[node name="WaterIcon" type="Sprite2D" parent="MainHive/ResourceControl/WaterProgressBar"]
+position = Vector2(-33, 23)
+texture = ExtResource("18_xtp1l")
+
+[node name="BiomassProgressBar" type="TextureProgressBar" parent="MainHive/ResourceControl"]
+offset_left = -250.0
+offset_top = 500.0
+offset_bottom = 550.0
+texture_under = ExtResource("14_ykafg")
+texture_over = ExtResource("15_0rmaj")
+texture_progress = ExtResource("16_0ii00")
+tint_under = Color(0, 0, 0, 1)
+
+[node name="BiomassIcon" type="Sprite2D" parent="MainHive/ResourceControl/BiomassProgressBar"]
+position = Vector2(-30, 24)
+texture = ExtResource("19_q544m")
+
+[node name="BiomassInteractArea" type="Area2D" parent="MainHive/ResourceControl"]
+position = Vector2(239, 104)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainHive/ResourceControl/BiomassInteractArea"]
+position = Vector2(65, 261)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_n718v")
+
+[node name="Sprite2D" type="Sprite2D" parent="MainHive/ResourceControl/BiomassInteractArea"]
+position = Vector2(64, 258)
+texture = ExtResource("3_svlki")
+
+[node name="Sprite2D2" type="Sprite2D" parent="MainHive/ResourceControl/BiomassInteractArea"]
+position = Vector2(203, 140)
+texture = ExtResource("19_q544m")
+
+[node name="Sprite2D3" type="Sprite2D" parent="MainHive/ResourceControl/BiomassInteractArea"]
+position = Vector2(137, 145)
+texture = ExtResource("21_61u3r")
+
+[node name="Sprite2D4" type="Sprite2D" parent="MainHive/ResourceControl/BiomassInteractArea"]
+position = Vector2(190, 241)
+texture = ExtResource("22_umres")
+
+[node name="Sprite2D5" type="Sprite2D" parent="MainHive/ResourceControl/BiomassInteractArea"]
+position = Vector2(273, 240)
+texture = ExtResource("17_l8qtu")
+
+[node name="Sprite2D6" type="Sprite2D" parent="MainHive/ResourceControl/BiomassInteractArea"]
+position = Vector2(127, 324)
+texture = ExtResource("22_umres")
+
+[node name="Sprite2D7" type="Sprite2D" parent="MainHive/ResourceControl/BiomassInteractArea"]
+position = Vector2(208, 322)
+texture = ExtResource("18_xtp1l")
+
+[node name="HiveGrowInteractArea" type="Area2D" parent="MainHive/ResourceControl"]
+position = Vector2(240, 369)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainHive/ResourceControl/HiveGrowInteractArea"]
+position = Vector2(65, 261)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_n718v")
+
+[node name="Sprite2D" type="Sprite2D" parent="MainHive/ResourceControl/HiveGrowInteractArea"]
+position = Vector2(64, 258)
+texture = ExtResource("3_svlki")
+
+[node name="Sprite2D2" type="Sprite2D" parent="MainHive/ResourceControl/HiveGrowInteractArea"]
+position = Vector2(235, 62)
+texture = ExtResource("2_sqehh")
+
+[node name="Sprite2D3" type="Sprite2D" parent="MainHive/ResourceControl/HiveGrowInteractArea"]
+position = Vector2(159, 223)
+texture = ExtResource("21_61u3r")
+
+[node name="Sprite2D4" type="Sprite2D" parent="MainHive/ResourceControl/HiveGrowInteractArea"]
+position = Vector2(145, 326)
+texture = ExtResource("22_umres")
+
+[node name="Sprite2D5" type="Sprite2D" parent="MainHive/ResourceControl/HiveGrowInteractArea"]
+position = Vector2(228, 325)
+texture = ExtResource("19_q544m")
+
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(0, 150)
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("2_2qj2a")
 metadata/_edit_group_ = true
 
@@ -591,9 +725,12 @@ script = SubResource("GDScript_qqhcx")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera"]
 
-[node name="Timer" type="Timer" parent="Camera/CanvasLayer"]
+[node name="DayCycleTimer" type="Timer" parent="Camera/CanvasLayer"]
 process_callback = 0
-wait_time = 5.0
+wait_time = 180.0
+autostart = true
+
+[node name="SecondsTimer" type="Timer" parent="Camera/CanvasLayer"]
 autostart = true
 
 [node name="DayIcon" type="Sprite2D" parent="Camera/CanvasLayer"]
@@ -680,10 +817,15 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Exit"
 
-[connection signal="body_entered" from="MainHive/InteractArea" to="MainHive" method="_on_interact_area_body_entered"]
-[connection signal="body_exited" from="MainHive/InteractArea" to="MainHive" method="_on_interact_area_body_exited"]
+[connection signal="body_entered" from="MainHive/HiveInteractArea" to="MainHive" method="_on_interact_area_body_entered"]
+[connection signal="body_exited" from="MainHive/HiveInteractArea" to="MainHive" method="_on_interact_area_body_exited"]
+[connection signal="body_entered" from="MainHive/ResourceControl/BiomassInteractArea" to="MainHive" method="_on_biomass_interact_area_body_entered"]
+[connection signal="body_exited" from="MainHive/ResourceControl/BiomassInteractArea" to="MainHive" method="_on_biomass_interact_area_body_exited"]
+[connection signal="body_entered" from="MainHive/ResourceControl/HiveGrowInteractArea" to="MainHive" method="_on_hive_grow_interact_area_body_entered"]
+[connection signal="body_exited" from="MainHive/ResourceControl/HiveGrowInteractArea" to="MainHive" method="_on_hive_grow_interact_area_body_exited"]
 [connection signal="input_event" from="Player" to="MainHive" method="_on_player_input_event"]
-[connection signal="timeout" from="Camera/CanvasLayer/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Camera/CanvasLayer/DayCycleTimer" to="." method="_on_day_cycle_timer_timeout"]
+[connection signal="timeout" from="Camera/CanvasLayer/SecondsTimer" to="." method="_on_seconds_timer_timeout"]
 [connection signal="pressed" from="Camera/CanvasLayer/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="Camera/CanvasLayer/PauseScreen/ResumeButton" to="Camera/CanvasLayer/PauseScreen" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Camera/CanvasLayer/PauseScreen/MainMenuButton" to="Camera/CanvasLayer/PauseScreen" method="_on_main_menu_button_pressed"]

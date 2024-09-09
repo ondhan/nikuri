@@ -1,6 +1,11 @@
 extends Node2D
 
+
 var time = "day"
+
+
+func _ready() -> void:
+	_set_time()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,14 +36,19 @@ func _set_time() -> void:
 
 
 # changes day to night once timer stops
-func _on_timer_timeout() -> void:
+func _on_day_cycle_timer_timeout() -> void:
 	if time == "day":
-		print("switching to night")
+		#print("switching to night")
 		time = "night"
 		$Camera/CanvasLayer/DayIcon.hide()
 		$Camera/CanvasLayer/NightIcon.show()
 	else:
-		print("switching to day")
+		#print("switching to day")
 		time = "day"
 		$Camera/CanvasLayer/DayIcon.show()
 		$Camera/CanvasLayer/NightIcon.hide()
+
+
+func _on_seconds_timer_timeout() -> void:
+	if time == "day":
+		$MainHive._resource_counter_change("sun", 0.5)

@@ -1,4 +1,6 @@
 res://game_screen/game_screen.tscn
-res://game_screen/player.gd
 res://main_menu/main_menu.tscn
 res://options_menu/options_menu.tscn
+res://game_screen/resource_control.gd
+res://game_screen/game_screen.gd
+res://game_screen/main_hive.gd
