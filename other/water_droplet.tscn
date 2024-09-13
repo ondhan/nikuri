@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwm8gjyxkjyi3"]
+
+[ext_resource type="Script" path="res://other/water_droplet.gd" id="1_eoe27"]
+[ext_resource type="Texture2D" uid="uid://ej6tdxxbt7ev" path="res://assets/resources/water_droplet_1.png" id="2_81gxn"]
+[ext_resource type="Texture2D" uid="uid://0grbgcajj75d" path="res://assets/resources/water_droplet_2.png" id="3_mbdsr"]
+[ext_resource type="Texture2D" uid="uid://biwrasaa3w3t6" path="res://assets/resources/water_droplet_3.png" id="4_rgr15"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ebc84"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_81gxn")
+}],
+"loop": true,
+"name": &"1_big",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mbdsr")
+}],
+"loop": true,
+"name": &"2_medium",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_rgr15")
+}],
+"loop": true,
+"name": &"3_small",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2lqm8"]
+radius = 32.0
+height = 86.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghbmk"]
+radius = 22.0
+height = 58.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ph1mw"]
+radius = 11.0
+
+[node name="WaterDroplet" type="Node2D"]
+position = Vector2(110, 29)
+script = ExtResource("1_eoe27")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+sprite_frames = SubResource("SpriteFrames_ebc84")
+animation = &"1_big"
+autoplay = "1_big"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_2lqm8")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2(-1, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ghbmk")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2(-1, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ph1mw")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_droplet_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

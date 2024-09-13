@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://djbvvtdb2q3hi"]
+[gd_scene load_steps=108 format=3 uid="uid://djbvvtdb2q3hi"]
 
 [ext_resource type="Script" path="res://game_screen/game_screen.gd" id="1_10y4f"]
 [ext_resource type="Script" path="res://game_screen/player.gd" id="2_2qj2a"]
@@ -11,9 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://e483wpd61u3f" path="res://assets/nikuri/idle_n_2.png" id="4_rd3nm"]
 [ext_resource type="Texture2D" uid="uid://dbpt7vpoc7anw" path="res://assets/buildings/main_hive/main_hive_2_2.png" id="4_ysggw"]
 [ext_resource type="Texture2D" uid="uid://bxhuur60ds3j4" path="res://assets/nikuri/idle_n_3.png" id="5_026x7"]
+[ext_resource type="Texture2D" uid="uid://cmaa1lw7poe52" path="res://assets/buildings/main_hive/main_hive_1_2.png" id="5_awiel"]
 [ext_resource type="Texture2D" uid="uid://b15stv7qo7kiq" path="res://assets/buildings/main_hive/main_hive_2_3.png" id="5_rlhpq"]
 [ext_resource type="Texture2D" uid="uid://dhti3nlorigwo" path="res://assets/nikuri/idle_n_4.png" id="6_0bgc3"]
 [ext_resource type="Texture2D" uid="uid://km3cub6qv70v" path="res://assets/buildings/main_hive/main_hive_3_1.png" id="6_uq3k5"]
+[ext_resource type="Texture2D" uid="uid://cswj3lggvrdqu" path="res://assets/buildings/main_hive/main_hive_1_3.png" id="6_ylq84"]
 [ext_resource type="Texture2D" uid="uid://bv52ergumiafr" path="res://assets/buildings/main_hive/main_hive_3_2.png" id="7_vrf6u"]
 [ext_resource type="Texture2D" uid="uid://emdak0lvfptn" path="res://assets/nikuri/idle_nw_1.png" id="7_xodry"]
 [ext_resource type="Texture2D" uid="uid://cvsyg8u74rlto" path="res://assets/nikuri/idle_nw_2.png" id="8_lljqd"]
@@ -103,6 +105,12 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_sqehh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_awiel")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ylq84")
 }],
 "loop": true,
 "name": &"phase_1",
@@ -175,6 +183,9 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rn5fc"]
 radius = 82.0
 height = 168.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ra3y"]
+radius = 538.134
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ix62d"]
 animations = [{
@@ -486,10 +497,10 @@ custom_minimum_size = Vector2(5760, 3240)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -750.0
-offset_top = -500.0
-offset_right = 750.0
-offset_bottom = 500.0
+offset_left = -2880.0
+offset_top = -1620.0
+offset_right = 2880.0
+offset_bottom = 1620.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
@@ -581,6 +592,7 @@ position = Vector2(4, 120)
 shape = SubResource("CapsuleShape2D_rn5fc")
 
 [node name="ResourceControl" type="Control" parent="MainHive"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -107.0
@@ -590,6 +602,7 @@ offset_bottom = 18.0
 script = ExtResource("82_2utfl")
 
 [node name="SunProgressBar" type="TextureProgressBar" parent="MainHive/ResourceControl"]
+layout_mode = 0
 offset_left = -250.0
 offset_top = 350.0
 offset_bottom = 400.0
@@ -603,6 +616,7 @@ position = Vector2(-31, 23)
 texture = ExtResource("17_l8qtu")
 
 [node name="WaterProgressBar" type="TextureProgressBar" parent="MainHive/ResourceControl"]
+layout_mode = 0
 offset_left = -250.0
 offset_top = 425.0
 offset_bottom = 475.0
@@ -616,6 +630,7 @@ position = Vector2(-33, 23)
 texture = ExtResource("18_xtp1l")
 
 [node name="BiomassProgressBar" type="TextureProgressBar" parent="MainHive/ResourceControl"]
+layout_mode = 0
 offset_left = -250.0
 offset_top = 500.0
 offset_bottom = 550.0
@@ -695,6 +710,12 @@ texture = ExtResource("22_umres")
 [node name="Sprite2D5" type="Sprite2D" parent="MainHive/ResourceControl/HiveGrowInteractArea"]
 position = Vector2(228, 325)
 texture = ExtResource("19_q544m")
+
+[node name="Area2D" type="Area2D" parent="MainHive/ResourceControl"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainHive/ResourceControl/Area2D"]
+position = Vector2(110, 413)
+shape = SubResource("CircleShape2D_2ra3y")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(0, 150)
@@ -823,6 +844,7 @@ text = "Exit"
 [connection signal="body_exited" from="MainHive/ResourceControl/BiomassInteractArea" to="MainHive" method="_on_biomass_interact_area_body_exited"]
 [connection signal="body_entered" from="MainHive/ResourceControl/HiveGrowInteractArea" to="MainHive" method="_on_hive_grow_interact_area_body_entered"]
 [connection signal="body_exited" from="MainHive/ResourceControl/HiveGrowInteractArea" to="MainHive" method="_on_hive_grow_interact_area_body_exited"]
+[connection signal="body_exited" from="MainHive/ResourceControl/Area2D" to="MainHive" method="_on_area_2d_body_exited"]
 [connection signal="input_event" from="Player" to="MainHive" method="_on_player_input_event"]
 [connection signal="timeout" from="Camera/CanvasLayer/DayCycleTimer" to="." method="_on_day_cycle_timer_timeout"]
 [connection signal="timeout" from="Camera/CanvasLayer/SecondsTimer" to="." method="_on_seconds_timer_timeout"]

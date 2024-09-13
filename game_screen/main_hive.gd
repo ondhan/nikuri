@@ -45,11 +45,11 @@ func _input(event):
 			_upgrade_hive()
 			print("hive upgraded")
 		elif current_phase == 2 and currentBiomass == maxBiomass:
-			_resource_counter_change("biomass", -250)
+			_resource_counter_change("biomass", -100)
 			_upgrade_hive()
 			print("hive upgraded")
 		elif current_phase == 3 and currentBiomass == maxBiomass:
-			_resource_counter_change("biomass", -400)
+			_resource_counter_change("biomass", -100)
 			_upgrade_hive()
 			print("hive upgraded")
 	if event.is_action_pressed("TEST"):
@@ -74,40 +74,19 @@ func _phase_setter() -> void:
 		hive = get_node("Phase1")
 		$Phase1/AnimatedSprite2D.animation = "phase_1"
 		$Phase1/AnimatedSprite2D.play()
-		hive.show()
-		maxBiomass = 100
-		maxSun = 100
-		maxWater = 100
 	elif current_phase == 2:
 		hive = get_node("Phase2")
 		$Phase2/AnimatedSprite2D.animation = "phase_2"
 		$Phase2/AnimatedSprite2D.play()
-		hive.show()
-		maxBiomass = 250
-		maxSun = 300
-		maxWater = 300
 	elif current_phase == 3:
 		hive = get_node("Phase3")
 		$Phase2/AnimatedSprite2D.animation = "phase_3"
 		$Phase2/AnimatedSprite2D.play()
-		hive.show()
-		maxBiomass = 400
-		maxSun = 600
-		maxWater = 600
 	elif current_phase == 4:
 		hive = get_node("Phase4")
 		$Phase2/AnimatedSprite2D.animation = "phase_4"
 		$Phase2/AnimatedSprite2D.play()
-		hive.show()
-		maxBiomass = 550
-		maxSun = 1000
-		maxWater = 1000
-	var sunBarProgress = (maxSun/100) * currentSun
-	$ResourceControl.set_sun_value(sunBarProgress)
-	var waterBarProgress = (maxWater/100) * currentWater
-	$ResourceControl.set_water_value(waterBarProgress)
-	var biomassBarProgress = (maxBiomass/100) * currentBiomass
-	$ResourceControl.set_biomass_value(biomassBarProgress)
+	hive.show()
 
 # upgrades hive and calls the _phase_setter()
 func _upgrade_hive() -> void:
@@ -168,3 +147,7 @@ func _on_hive_grow_interact_area_body_entered(body: Node2D) -> void:
 func _on_hive_grow_interact_area_body_exited(body: Node2D) -> void:
 	can_interact_upgrade = false
 	print("hive upgrade disabled")
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	$ResourceControl.hide()
