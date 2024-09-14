@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://djbvvtdb2q3hi"]
+[gd_scene load_steps=109 format=3 uid="uid://djbvvtdb2q3hi"]
 
 [ext_resource type="Script" path="res://game_screen/game_screen.gd" id="1_10y4f"]
 [ext_resource type="Script" path="res://game_screen/player.gd" id="2_2qj2a"]
@@ -93,6 +93,7 @@
 [ext_resource type="Texture2D" uid="uid://dv2efyt84elxo" path="res://assets/nikuri/move_se_3.png" id="68_eq6gm"]
 [ext_resource type="Texture2D" uid="uid://bkgafmtajgu3a" path="res://assets/nikuri/move_se_4.png" id="69_pp7rv"]
 [ext_resource type="Script" path="res://game_screen/resource_control.gd" id="82_2utfl"]
+[ext_resource type="PackedScene" uid="uid://c2qnv2j4mtdml" path="res://game_screen/sun_plant.tscn" id="94_yr4to"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_y70dm"]
 
@@ -592,7 +593,6 @@ position = Vector2(4, 120)
 shape = SubResource("CapsuleShape2D_rn5fc")
 
 [node name="ResourceControl" type="Control" parent="MainHive"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -107.0
@@ -681,6 +681,29 @@ texture = ExtResource("22_umres")
 position = Vector2(208, 322)
 texture = ExtResource("18_xtp1l")
 
+[node name="SunPlantInteractArea" type="Area2D" parent="MainHive/ResourceControl"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainHive/ResourceControl/SunPlantInteractArea"]
+position = Vector2(-52, 618)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_n718v")
+
+[node name="Sprite2D" type="Sprite2D" parent="MainHive/ResourceControl/SunPlantInteractArea"]
+position = Vector2(-53, 615)
+texture = ExtResource("3_svlki")
+
+[node name="Sprite2D4" type="Sprite2D" parent="MainHive/ResourceControl/SunPlantInteractArea"]
+position = Vector2(-232, 679)
+texture = ExtResource("22_umres")
+
+[node name="Sprite2D5" type="Sprite2D" parent="MainHive/ResourceControl/SunPlantInteractArea"]
+position = Vector2(-149, 678)
+texture = ExtResource("19_q544m")
+
+[node name="Sprite2D3" type="Sprite2D" parent="MainHive/ResourceControl/SunPlantInteractArea"]
+position = Vector2(-229, 605)
+texture = ExtResource("21_61u3r")
+
 [node name="HiveGrowInteractArea" type="Area2D" parent="MainHive/ResourceControl"]
 position = Vector2(240, 369)
 collision_layer = 2
@@ -748,7 +771,7 @@ script = SubResource("GDScript_qqhcx")
 
 [node name="DayCycleTimer" type="Timer" parent="Camera/CanvasLayer"]
 process_callback = 0
-wait_time = 180.0
+wait_time = 10.0
 autostart = true
 
 [node name="SecondsTimer" type="Timer" parent="Camera/CanvasLayer"]
@@ -838,10 +861,40 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Exit"
 
+[node name="SunPlant" parent="." instance=ExtResource("94_yr4to")]
+visible = false
+position = Vector2(514, -193)
+
+[node name="SunPlant2" parent="." instance=ExtResource("94_yr4to")]
+visible = false
+position = Vector2(709, 380)
+
+[node name="SunPlant3" parent="." instance=ExtResource("94_yr4to")]
+visible = false
+position = Vector2(-592, 19)
+
+[node name="SunPlant4" parent="." instance=ExtResource("94_yr4to")]
+visible = false
+position = Vector2(-477, 470)
+
+[node name="SunPlantTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="declare_day" from="." to="SunPlant" method="_on_game_screen_declare_day"]
+[connection signal="declare_day" from="." to="SunPlant2" method="_on_game_screen_declare_day"]
+[connection signal="declare_day" from="." to="SunPlant3" method="_on_game_screen_declare_day"]
+[connection signal="declare_day" from="." to="SunPlant4" method="_on_game_screen_declare_day"]
+[connection signal="declare_night" from="." to="SunPlant" method="_on_game_screen_declare_night"]
+[connection signal="declare_night" from="." to="SunPlant2" method="_on_game_screen_declare_night"]
+[connection signal="declare_night" from="." to="SunPlant3" method="_on_game_screen_declare_night"]
+[connection signal="declare_night" from="." to="SunPlant4" method="_on_game_screen_declare_night"]
 [connection signal="body_entered" from="MainHive/HiveInteractArea" to="MainHive" method="_on_interact_area_body_entered"]
 [connection signal="body_exited" from="MainHive/HiveInteractArea" to="MainHive" method="_on_interact_area_body_exited"]
 [connection signal="body_entered" from="MainHive/ResourceControl/BiomassInteractArea" to="MainHive" method="_on_biomass_interact_area_body_entered"]
 [connection signal="body_exited" from="MainHive/ResourceControl/BiomassInteractArea" to="MainHive" method="_on_biomass_interact_area_body_exited"]
+[connection signal="body_entered" from="MainHive/ResourceControl/SunPlantInteractArea" to="MainHive" method="_on_sun_plant_interact_area_body_entered"]
+[connection signal="body_exited" from="MainHive/ResourceControl/SunPlantInteractArea" to="MainHive" method="_on_sun_plant_interact_area_body_exited"]
 [connection signal="body_entered" from="MainHive/ResourceControl/HiveGrowInteractArea" to="MainHive" method="_on_hive_grow_interact_area_body_entered"]
 [connection signal="body_exited" from="MainHive/ResourceControl/HiveGrowInteractArea" to="MainHive" method="_on_hive_grow_interact_area_body_exited"]
 [connection signal="body_exited" from="MainHive/ResourceControl/Area2D" to="MainHive" method="_on_area_2d_body_exited"]
@@ -852,3 +905,11 @@ text = "Exit"
 [connection signal="pressed" from="Camera/CanvasLayer/PauseScreen/ResumeButton" to="Camera/CanvasLayer/PauseScreen" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Camera/CanvasLayer/PauseScreen/MainMenuButton" to="Camera/CanvasLayer/PauseScreen" method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="Camera/CanvasLayer/PauseScreen/ExitButton" to="Camera/CanvasLayer/PauseScreen" method="_on_exit_button_pressed"]
+[connection signal="visibility_changed" from="SunPlant" to="SunPlant" method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="SunPlant2" to="SunPlant2" method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="SunPlant3" to="SunPlant3" method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="SunPlant4" to="SunPlant4" method="_on_visibility_changed"]
+[connection signal="timeout" from="SunPlantTimer" to="SunPlant" method="_on_sun_plant_timer_timeout"]
+[connection signal="timeout" from="SunPlantTimer" to="SunPlant2" method="_on_sun_plant_timer_timeout"]
+[connection signal="timeout" from="SunPlantTimer" to="SunPlant3" method="_on_sun_plant_timer_timeout"]
+[connection signal="timeout" from="SunPlantTimer" to="SunPlant4" method="_on_sun_plant_timer_timeout"]

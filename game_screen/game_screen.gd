@@ -1,14 +1,17 @@
 extends Node2D
 
 
-var time = "day"
+@onready var time = "day"
 var day = 1
+signal declare_day
+signal declare_night
 
 
 func _ready() -> void:
 	_set_time()
 	spawn_water(4)
-	
+	what_time()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -51,11 +54,14 @@ func _on_day_cycle_timer_timeout() -> void:
 		$Camera/CanvasLayer/DayIcon.show()
 		$Camera/CanvasLayer/NightIcon.hide()
 		spawn_water(3+day)
-
+	what_time()
 
 func _on_seconds_timer_timeout() -> void:
 	if time == "day":
-		$MainHive._resource_counter_change("sun", 0.5)
+		$MainHive._resource_counter_change("sun", 0.75*$MainHive.current_phase)
+	else:
+		$MainHive._resource_counter_change("sun", -0.25*$MainHive.current_phase)
+	$MainHive._resource_counter_change("water", 0.25*$MainHive.current_phase)
 
 
 func spawn_water(num):
@@ -73,5 +79,29 @@ func spawn_water(num):
 		add_child(droplet)
 
 
-func _on_droplet_body_entered() -> void:
-	$MainHive._resource_counter_change("water", $WaterDroplet.water_value)
+func _on_droplet_body_entered(water_value) -> void:
+	$MainHive._resource_counter_change("water", water_value)
+
+func what_time():
+	if time == "day":
+		declare_day.emit()
+	elif time == "night":
+		declare_night.emit()
+
+
+func sun_plant_activity():
+	print("sun plant yield")
+	if time == "day":
+		$MainHive._resource_counter_change("sun", 1)
+
+
+func buy_sun_plant(num):
+	print("sun plant bought")
+	if num == 1:
+		get_node("SunPlant").show()
+	elif num == 2:
+		get_node("SunPlant2").show()
+	elif num == 3:
+		get_node("SunPlant3").show()
+	elif num == 4:
+		get_node("SunPlant4").show()

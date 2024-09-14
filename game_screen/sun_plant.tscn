@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=3 uid="uid://c2qnv2j4mtdml"]
+
+[ext_resource type="Script" path="res://game_screen/sun_plant.gd" id="1_m4ddc"]
+[ext_resource type="Texture2D" uid="uid://cdetksm2x5k7l" path="res://assets/buildings/sun_plant/sun_plant_closed.png" id="2_wx84v"]
+[ext_resource type="Texture2D" uid="uid://dxpms8ocqu7y3" path="res://assets/buildings/sun_plant/sun_plant_open_1.png" id="3_rbfmy"]
+[ext_resource type="Texture2D" uid="uid://bjk3qm2cs760i" path="res://assets/buildings/sun_plant/sun_plant_opening_2.png" id="4_gcyit"]
+[ext_resource type="Texture2D" uid="uid://dxafv1om1ry64" path="res://assets/buildings/sun_plant/sun_plant_opening_1.png" id="5_lej4r"]
+[ext_resource type="Texture2D" uid="uid://ct3yehanv433t" path="res://assets/buildings/sun_plant/sun_plant_open_2.png" id="6_hjb8t"]
+[ext_resource type="Texture2D" uid="uid://e5ogkmpnkixi" path="res://assets/buildings/sun_plant/sun_plant_open_3.png" id="7_wwcai"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kr2w6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wx84v")
+}],
+"loop": true,
+"name": &"sun_plant_closed",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_rbfmy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gcyit")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lej4r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wx84v")
+}],
+"loop": false,
+"name": &"sun_plant_closing",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_rbfmy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_hjb8t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wwcai")
+}],
+"loop": true,
+"name": &"sun_plant_open",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wx84v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lej4r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gcyit")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rbfmy")
+}],
+"loop": false,
+"name": &"sun_plant_opening",
+"speed": 2.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s31xx"]
+radius = 38.0
+height = 132.0
+
+[node name="SunPlant" type="Node2D"]
+position = Vector2(252, 3)
+script = ExtResource("1_m4ddc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kr2w6")
+animation = &"sun_plant_opening"
+autoplay = "sun_plant_closed"
+
+[node name="Area2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 45)
+shape = SubResource("CapsuleShape2D_s31xx")
+disabled = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

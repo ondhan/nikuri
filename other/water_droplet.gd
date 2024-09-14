@@ -30,5 +30,5 @@ func _on_timer_timeout() -> void:
 	dry()
 
 func _on_droplet_body_entered(body: Node2D) -> void:
-	get_parent()._on_droplet_body_entered()
+	get_parent()._on_droplet_body_entered(water_value)
 	queue_free()

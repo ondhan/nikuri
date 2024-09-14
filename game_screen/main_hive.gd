@@ -9,13 +9,18 @@ var current_phase = 1
 var can_interact_hive = false
 var can_interact_biomass = false
 var can_interact_upgrade = false
+var can_interact_sun_plant = false
 var currentSun = 0;
 var maxSun = 100;
 var currentWater = 0;
 var maxWater = 100;
 var currentBiomass = 0;
 var maxBiomass = 100;
-
+var sun_plants = 0
+@onready var sun_plant_1 = get_node("SunPlant")
+@onready var sun_plant_2 = get_node("SunPlant2")
+@onready var sun_plant_3 = get_node("SunPlant3")
+@onready var sun_plant_4 = get_node("SunPlant4")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -52,6 +57,14 @@ func _input(event):
 			_resource_counter_change("biomass", -100)
 			_upgrade_hive()
 			print("hive upgraded")
+			$ResourceControl/HiveGrowInteractArea.hide()
+	if event.is_action_pressed("ui_accept") and can_interact_sun_plant == true and currentBiomass >= 50:
+		if sun_plants != 4:
+			_resource_counter_change("biomass", -50)
+			sun_plants+=1
+			get_parent().buy_sun_plant(sun_plants)
+			if sun_plants == 4:
+				$ResourceControl/SunPlantInteractArea.hide()
 	if event.is_action_pressed("TEST"):
 			_resource_counter_change("sun", 100)
 			_resource_counter_change("water", 100)
@@ -151,3 +164,12 @@ func _on_hive_grow_interact_area_body_exited(body: Node2D) -> void:
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	$ResourceControl.hide()
+
+
+func _on_sun_plant_interact_area_body_entered(body: Node2D) -> void:
+	can_interact_sun_plant = true
+	print("sun plant upgrade disabled")
+
+func _on_sun_plant_interact_area_body_exited(body: Node2D) -> void:
+	can_interact_sun_plant = false
+	print("sun plant upgrade disabled")
