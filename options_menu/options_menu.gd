@@ -10,12 +10,13 @@ func _ready() -> void:
 	# sets the initial text on the window mode button based on the starting mode
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 		get_node("WindowModeButton").text = "Fullscreen"
+		#get_node("WindowModeButton/0").get_popup().set("custom_constants/vseparation", 30)
 	elif DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
 		get_node("WindowModeButton").text = "Windowed"
 	# test button setup
-	var menuButton2 = $MenuButton
-	var popup_test=menuButton2.get_popup()
-	popup_test.id_pressed.connect(_on_test_menu_button_pressed)
+	#var menuButton2 = $MenuButton
+	#var popup_test=menuButton2.get_popup()
+	#popup_test.id_pressed.connect(_on_test_menu_button_pressed)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,9 +42,9 @@ func _on_window_menu_button_pressed(id) -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 
-func _on_test_menu_button_pressed(id) -> void:
-	match(id):
-		0: 
-			print("A")
-		1: 
-			print("B")
+#func _on_test_menu_button_pressed(id) -> void:
+#	match(id):
+#		0: 
+#			print("A")
+#		1: 
+#			print("B")

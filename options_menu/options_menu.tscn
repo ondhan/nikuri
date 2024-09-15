@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://byaymn8o68f1t"]
+[gd_scene load_steps=3 format=3 uid="uid://byaymn8o68f1t"]
 
 [ext_resource type="Script" path="res://options_menu/options_menu.gd" id="1_uhb8j"]
+
+[sub_resource type="Theme" id="Theme_44r37"]
+default_font_size = 30
 
 [node name="OptionsMenu" type="Node2D"]
 position = Vector2(960, 540)
@@ -20,24 +23,28 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="BackButton" type="Button" parent="."]
-offset_left = -50.0
-offset_top = 250.0
-offset_right = 50.0
-offset_bottom = 281.0
+offset_left = -100.0
+offset_top = 200.0
+offset_right = 100.0
+offset_bottom = 262.0
+theme_override_font_sizes/font_size = 30
 text = "Back"
 
 [node name="WindowModeButton" type="MenuButton" parent="."]
-offset_left = -50.0
+offset_left = -100.0
 offset_top = -250.0
-offset_right = 50.0
-offset_bottom = -219.0
-text = "THIS TEXT SHOULD NOT BE VISIBLE"
+offset_right = 100.0
+offset_bottom = -188.0
+theme = SubResource("Theme_44r37")
+theme_override_font_sizes/font_size = 30
+text = "ERROR"
 item_count = 2
 popup/item_0/text = "Fullscreen"
 popup/item_1/text = "Windowed"
 popup/item_1/id = 1
 
 [node name="MenuButton" type="MenuButton" parent="."]
+visible = false
 offset_right = 8.0
 offset_bottom = 8.0
 text = "TEST"

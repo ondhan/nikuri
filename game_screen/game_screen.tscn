@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://djbvvtdb2q3hi"]
+[gd_scene load_steps=110 format=3 uid="uid://djbvvtdb2q3hi"]
 
 [ext_resource type="Script" path="res://game_screen/game_screen.gd" id="1_10y4f"]
 [ext_resource type="Script" path="res://game_screen/player.gd" id="2_2qj2a"]
@@ -56,6 +56,7 @@
 [ext_resource type="Texture2D" uid="uid://dda5tfwl8cl1g" path="res://assets/nikuri/idle_ne_3.png" id="24_fjku8"]
 [ext_resource type="Texture2D" uid="uid://bwaqbn7n62j8w" path="res://assets/nikuri/idle_ne_4.png" id="25_ecyti"]
 [ext_resource type="Texture2D" uid="uid://h4a3oq7ou3i4" path="res://assets/nikuri/move_n_3.png" id="25_pknk0"]
+[ext_resource type="Texture2D" uid="uid://dnnqwmtrjx0e6" path="res://assets/icons/icon_sun_plant.png" id="25_y5ivd"]
 [ext_resource type="Texture2D" uid="uid://bieh7xflsc84d" path="res://assets/nikuri/move_n_4.png" id="26_cw4a6"]
 [ext_resource type="Texture2D" uid="uid://sepqfu265khk" path="res://assets/nikuri/move_nw_1.png" id="27_d6feh"]
 [ext_resource type="Texture2D" uid="uid://cdohahoec8g2t" path="res://assets/nikuri/move_nw_2.png" id="28_g7l6e"]
@@ -187,6 +188,28 @@ height = 168.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ra3y"]
 radius = 538.134
+
+[sub_resource type="GDScript" id="GDScript_qqhcx"]
+script/source = "extends Camera2D
+
+
+var node_to_follow = null
+var smooth_amount = 0.1
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+func set_follow_node(new_node):
+	node_to_follow = new_node
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if node_to_follow:
+		position = lerp(position, node_to_follow.position, smooth_amount)
+"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ix62d"]
 animations = [{
@@ -467,28 +490,6 @@ animations = [{
 radius = 24.0
 height = 50.0
 
-[sub_resource type="GDScript" id="GDScript_qqhcx"]
-script/source = "extends Camera2D
-
-
-var node_to_follow = null
-var smooth_amount = 0.1
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-func set_follow_node(new_node):
-	node_to_follow = new_node
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if node_to_follow:
-		position = lerp(position, node_to_follow.position, smooth_amount)
-"
-
 [node name="GameScreen" type="Node2D"]
 position = Vector2(960, 540)
 script = ExtResource("1_10y4f")
@@ -593,6 +594,7 @@ position = Vector2(4, 120)
 shape = SubResource("CapsuleShape2D_rn5fc")
 
 [node name="ResourceControl" type="Control" parent="MainHive"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -107.0
@@ -704,6 +706,10 @@ texture = ExtResource("19_q544m")
 position = Vector2(-229, 605)
 texture = ExtResource("21_61u3r")
 
+[node name="Sprite2D2" type="Sprite2D" parent="MainHive/ResourceControl/SunPlantInteractArea"]
+position = Vector2(-155, 595)
+texture = ExtResource("25_y5ivd")
+
 [node name="HiveGrowInteractArea" type="Area2D" parent="MainHive/ResourceControl"]
 position = Vector2(240, 369)
 collision_layer = 2
@@ -740,24 +746,6 @@ texture = ExtResource("19_q544m")
 position = Vector2(110, 413)
 shape = SubResource("CircleShape2D_2ra3y")
 
-[node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(0, 150)
-collision_layer = 3
-collision_mask = 3
-script = ExtResource("2_2qj2a")
-metadata/_edit_group_ = true
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
-sprite_frames = SubResource("SpriteFrames_ix62d")
-animation = &"idle_se"
-autoplay = "idle_s"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("CapsuleShape2D_12a6m")
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
-remote_path = NodePath("../../Camera")
-
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(0, 150)
 limit_left = -1920
@@ -771,7 +759,7 @@ script = SubResource("GDScript_qqhcx")
 
 [node name="DayCycleTimer" type="Timer" parent="Camera/CanvasLayer"]
 process_callback = 0
-wait_time = 10.0
+wait_time = 180.0
 autostart = true
 
 [node name="SecondsTimer" type="Timer" parent="Camera/CanvasLayer"]
@@ -826,12 +814,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -50.0
-offset_right = 50.0
-offset_bottom = -19.0
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = -38.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 30
 text = "Resume"
 
 [node name="MainMenuButton" type="Button" parent="Camera/CanvasLayer/PauseScreen"]
@@ -840,11 +829,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -50.0
-offset_right = 50.0
-offset_bottom = 31.0
+offset_left = -100.0
+offset_right = 100.0
+offset_bottom = 62.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 30
 text = "Main menu"
 
 [node name="ExitButton" type="Button" parent="Camera/CanvasLayer/PauseScreen"]
@@ -853,12 +843,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = 50.0
-offset_right = 50.0
-offset_bottom = 81.0
+offset_left = -100.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 162.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 30
 text = "Exit"
 
 [node name="SunPlant" parent="." instance=ExtResource("94_yr4to")]
@@ -881,6 +872,24 @@ position = Vector2(-477, 470)
 wait_time = 10.0
 autostart = true
 
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(0, 150)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("2_2qj2a")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+sprite_frames = SubResource("SpriteFrames_ix62d")
+animation = &"idle_se"
+autoplay = "idle_s"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CapsuleShape2D_12a6m")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera")
+
 [connection signal="declare_day" from="." to="SunPlant" method="_on_game_screen_declare_day"]
 [connection signal="declare_day" from="." to="SunPlant2" method="_on_game_screen_declare_day"]
 [connection signal="declare_day" from="." to="SunPlant3" method="_on_game_screen_declare_day"]
@@ -898,7 +907,6 @@ autostart = true
 [connection signal="body_entered" from="MainHive/ResourceControl/HiveGrowInteractArea" to="MainHive" method="_on_hive_grow_interact_area_body_entered"]
 [connection signal="body_exited" from="MainHive/ResourceControl/HiveGrowInteractArea" to="MainHive" method="_on_hive_grow_interact_area_body_exited"]
 [connection signal="body_exited" from="MainHive/ResourceControl/Area2D" to="MainHive" method="_on_area_2d_body_exited"]
-[connection signal="input_event" from="Player" to="MainHive" method="_on_player_input_event"]
 [connection signal="timeout" from="Camera/CanvasLayer/DayCycleTimer" to="." method="_on_day_cycle_timer_timeout"]
 [connection signal="timeout" from="Camera/CanvasLayer/SecondsTimer" to="." method="_on_seconds_timer_timeout"]
 [connection signal="pressed" from="Camera/CanvasLayer/PauseButton" to="." method="_on_pause_button_pressed"]
@@ -913,3 +921,4 @@ autostart = true
 [connection signal="timeout" from="SunPlantTimer" to="SunPlant2" method="_on_sun_plant_timer_timeout"]
 [connection signal="timeout" from="SunPlantTimer" to="SunPlant3" method="_on_sun_plant_timer_timeout"]
 [connection signal="timeout" from="SunPlantTimer" to="SunPlant4" method="_on_sun_plant_timer_timeout"]
+[connection signal="input_event" from="Player" to="MainHive" method="_on_player_input_event"]

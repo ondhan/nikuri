@@ -38,9 +38,9 @@ func _input(event):
 			$ResourceControl.show()
 	# buy biomass
 	if event.is_action_pressed("ui_accept") and can_interact_biomass == true:
-		if currentSun >= 30 and currentWater >= 20 and currentBiomass < maxBiomass:
+		if currentSun >= 20 and currentWater >= 20 and currentBiomass < maxBiomass:
 			print("biomass bought")
-			_resource_counter_change("sun", -30)
+			_resource_counter_change("sun", -20)
 			_resource_counter_change("water",-20)
 			_resource_counter_change("biomass", 10)
 	# upgrade hive

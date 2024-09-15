@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b61qms543tck3"]
+[gd_scene load_steps=3 format=3 uid="uid://b61qms543tck3"]
 
 [ext_resource type="Script" path="res://main_menu/main_menu.gd" id="1_wckvx"]
+[ext_resource type="Texture2D" uid="uid://dmqk2tw8gegnv" path="res://assets/title/title.png" id="2_00lba"]
 
 [node name="MainMenu" type="Node2D"]
 position = Vector2(960, 540)
@@ -19,20 +20,9 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Title" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -100.0
-offset_right = 24.0
-offset_bottom = -77.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Nikuri"
-metadata/_edit_use_anchors_ = true
+[node name="Title" type="Sprite2D" parent="."]
+position = Vector2(0, -200)
+texture = ExtResource("2_00lba")
 
 [node name="PlayButton" type="Button" parent="."]
 anchors_preset = 8
@@ -40,11 +30,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -50.0
-offset_right = 50.0
-offset_bottom = 31.0
+offset_left = -100.0
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 162.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 30
 text = "Play"
 metadata/_edit_use_anchors_ = true
 
@@ -54,12 +46,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = 50.0
-offset_right = 50.0
-offset_bottom = 81.0
+offset_left = -100.0
+offset_top = 200.0
+offset_right = 100.0
+offset_bottom = 262.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 30
 text = "Options"
 metadata/_edit_use_anchors_ = true
 
@@ -69,12 +62,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = 100.0
-offset_right = 50.0
-offset_bottom = 131.0
+offset_left = -100.0
+offset_top = 300.0
+offset_right = 100.0
+offset_bottom = 362.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 30
 text = "Exit"
 metadata/_edit_use_anchors_ = true
 

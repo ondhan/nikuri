@@ -9,7 +9,7 @@ signal declare_night
 
 func _ready() -> void:
 	_set_time()
-	spawn_water(4)
+	spawn_water(3)
 	what_time()
 
 
@@ -53,7 +53,7 @@ func _on_day_cycle_timer_timeout() -> void:
 		time = "day"
 		$Camera/CanvasLayer/DayIcon.show()
 		$Camera/CanvasLayer/NightIcon.hide()
-		spawn_water(3+day)
+		spawn_water(3)
 	what_time()
 
 func _on_seconds_timer_timeout() -> void:
