@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=3 uid="uid://djbvvtdb2q3hi"]
+[gd_scene load_steps=113 format=3 uid="uid://djbvvtdb2q3hi"]
 
 [ext_resource type="Script" path="res://game_screen/game_screen.gd" id="1_10y4f"]
 [ext_resource type="Script" path="res://game_screen/player.gd" id="2_2qj2a"]
@@ -58,10 +58,12 @@
 [ext_resource type="Texture2D" uid="uid://h4a3oq7ou3i4" path="res://assets/nikuri/move_n_3.png" id="25_pknk0"]
 [ext_resource type="Texture2D" uid="uid://dnnqwmtrjx0e6" path="res://assets/icons/icon_sun_plant.png" id="25_y5ivd"]
 [ext_resource type="Texture2D" uid="uid://bieh7xflsc84d" path="res://assets/nikuri/move_n_4.png" id="26_cw4a6"]
+[ext_resource type="Texture2D" uid="uid://bxbpdxx3cg33a" path="res://assets/icons/icon_win_trophy.png" id="26_wuepe"]
 [ext_resource type="Texture2D" uid="uid://sepqfu265khk" path="res://assets/nikuri/move_nw_1.png" id="27_d6feh"]
 [ext_resource type="Texture2D" uid="uid://cdohahoec8g2t" path="res://assets/nikuri/move_nw_2.png" id="28_g7l6e"]
 [ext_resource type="Texture2D" uid="uid://bqljmnde0eooy" path="res://assets/nikuri/move_nw_3.png" id="29_j1yvh"]
 [ext_resource type="Texture2D" uid="uid://chhfx73pdt1ho" path="res://assets/nikuri/move_nw_4.png" id="30_12fcp"]
+[ext_resource type="Script" path="res://game_screen/win_screen.gd" id="31_1r6a2"]
 [ext_resource type="Texture2D" uid="uid://da5bfspr5tqyc" path="res://assets/nikuri/move_s_1.png" id="31_rntbq"]
 [ext_resource type="Texture2D" uid="uid://bc0l0qfvxwjj6" path="res://assets/nikuri/move_s_2.png" id="32_dhr7v"]
 [ext_resource type="Texture2D" uid="uid://cv1ma71k5lcnm" path="res://assets/nikuri/move_s_3.png" id="33_icuve"]
@@ -185,6 +187,10 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rn5fc"]
 radius = 82.0
 height = 168.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n6j62"]
+radius = 17.0
+height = 66.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ra3y"]
 radius = 538.134
@@ -740,6 +746,26 @@ texture = ExtResource("22_umres")
 position = Vector2(228, 325)
 texture = ExtResource("19_q544m")
 
+[node name="WinTrophyInteractArea" type="Area2D" parent="MainHive/ResourceControl"]
+position = Vector2(20, 0)
+
+[node name="Sprite2D2" type="Sprite2D" parent="MainHive/ResourceControl/WinTrophyInteractArea"]
+position = Vector2(103, 709)
+texture = ExtResource("26_wuepe")
+
+[node name="Sprite2D3" type="Sprite2D" parent="MainHive/ResourceControl/WinTrophyInteractArea"]
+position = Vector2(45, 714)
+texture = ExtResource("21_61u3r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainHive/ResourceControl/WinTrophyInteractArea"]
+position = Vector2(110, 650)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_n6j62")
+
+[node name="Sprite2D" type="Sprite2D" parent="MainHive/ResourceControl/WinTrophyInteractArea"]
+position = Vector2(109, 648)
+texture = ExtResource("3_svlki")
+
 [node name="Area2D" type="Area2D" parent="MainHive/ResourceControl"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MainHive/ResourceControl/Area2D"]
@@ -852,6 +878,46 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 30
 text = "Exit"
 
+[node name="WinScreen" type="Node2D" parent="Camera/CanvasLayer"]
+visible = false
+position = Vector2(960, 540)
+script = ExtResource("31_1r6a2")
+
+[node name="ColorRect" type="ColorRect" parent="Camera/CanvasLayer/WinScreen"]
+custom_minimum_size = Vector2(2500, 2000)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1259.0
+offset_top = -991.0
+offset_right = 1241.0
+offset_bottom = 1009.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MainMenuButton" type="Button" parent="Camera/CanvasLayer/WinScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_right = 100.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Main menu"
+
+[node name="Label" type="Label" parent="Camera/CanvasLayer/WinScreen"]
+offset_left = -55.0
+offset_top = -150.0
+offset_right = 55.0
+offset_bottom = -80.0
+theme_override_font_sizes/font_size = 50
+text = "WIN"
+
 [node name="SunPlant" parent="." instance=ExtResource("94_yr4to")]
 visible = false
 position = Vector2(514, -193)
@@ -906,6 +972,8 @@ remote_path = NodePath("../../Camera")
 [connection signal="body_exited" from="MainHive/ResourceControl/SunPlantInteractArea" to="MainHive" method="_on_sun_plant_interact_area_body_exited"]
 [connection signal="body_entered" from="MainHive/ResourceControl/HiveGrowInteractArea" to="MainHive" method="_on_hive_grow_interact_area_body_entered"]
 [connection signal="body_exited" from="MainHive/ResourceControl/HiveGrowInteractArea" to="MainHive" method="_on_hive_grow_interact_area_body_exited"]
+[connection signal="body_entered" from="MainHive/ResourceControl/WinTrophyInteractArea" to="MainHive" method="_on_win_trophy_interact_area_body_entered"]
+[connection signal="body_exited" from="MainHive/ResourceControl/WinTrophyInteractArea" to="MainHive" method="_on_win_trophy_interact_area_body_exited"]
 [connection signal="body_exited" from="MainHive/ResourceControl/Area2D" to="MainHive" method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="Camera/CanvasLayer/DayCycleTimer" to="." method="_on_day_cycle_timer_timeout"]
 [connection signal="timeout" from="Camera/CanvasLayer/SecondsTimer" to="." method="_on_seconds_timer_timeout"]
@@ -913,6 +981,7 @@ remote_path = NodePath("../../Camera")
 [connection signal="pressed" from="Camera/CanvasLayer/PauseScreen/ResumeButton" to="Camera/CanvasLayer/PauseScreen" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Camera/CanvasLayer/PauseScreen/MainMenuButton" to="Camera/CanvasLayer/PauseScreen" method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="Camera/CanvasLayer/PauseScreen/ExitButton" to="Camera/CanvasLayer/PauseScreen" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Camera/CanvasLayer/WinScreen/MainMenuButton" to="Camera/CanvasLayer/WinScreen" method="_on_main_menu_button_pressed"]
 [connection signal="visibility_changed" from="SunPlant" to="SunPlant" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="SunPlant2" to="SunPlant2" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="SunPlant3" to="SunPlant3" method="_on_visibility_changed"]

@@ -105,3 +105,7 @@ func buy_sun_plant(num):
 		get_node("SunPlant3").show()
 	elif num == 4:
 		get_node("SunPlant4").show()
+
+
+func win_game():
+	$Camera/CanvasLayer/WinScreen.show()

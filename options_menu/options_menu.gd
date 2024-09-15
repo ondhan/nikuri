@@ -10,7 +10,6 @@ func _ready() -> void:
 	# sets the initial text on the window mode button based on the starting mode
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 		get_node("WindowModeButton").text = "Fullscreen"
-		#get_node("WindowModeButton/0").get_popup().set("custom_constants/vseparation", 30)
 	elif DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
 		get_node("WindowModeButton").text = "Windowed"
 	# test button setup
