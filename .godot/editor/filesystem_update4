@@ -1,8 +1,1 @@
 res://game_screen/game_screen.tscn
-res://game_screen/sun_plant.tscn
-res://main_menu/main_menu.tscn
-res://options_menu/options_menu.tscn
-res://game_screen/main_hive.gd
-res://game_screen/win_screen.gd
-res://options_menu/options_menu.gd
-res://game_screen/game_screen.gd
