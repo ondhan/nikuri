@@ -1,3 +1,5 @@
+# Nikuri
+
 Project name: Nikuri
 
 Nikuri is a small idle game made in Godot. You take control of a small ball-shaped creature and your goal is to grow your hive. 
