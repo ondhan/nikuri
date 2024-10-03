@@ -72,6 +72,13 @@ theme_override_font_sizes/font_size = 30
 text = "Exit"
 metadata/_edit_use_anchors_ = true
 
+[node name="AuthorLabel" type="Label" parent="."]
+offset_left = -960.0
+offset_top = 516.0
+offset_right = -786.0
+offset_bottom = 539.0
+text = "Game by Ondřej Hanzl"
+
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
